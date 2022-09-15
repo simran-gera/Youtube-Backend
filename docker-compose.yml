@@ -1,0 +1,29 @@
+version: '3.6'
+
+services:
+  pythonapp:
+    container_name: youtube_api
+    image: youtube_api
+    build: .
+    environment:
+      - YOUTUBE_DATA_API_KEY=AIzaSyCuLIxoeO98usrpXDoLr9IjXsx7C-oRGPI
+    ports:
+      - "8000:80"
+    depends_on:
+      - db
+
+  db:
+    container_name: youtubedb
+    image: postgres:11
+    ports:
+      - "5000:5432"
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=youtube
+    volumes:
+      - pgdata:/var/lib/postgresql/data/
+
+volumes:
+  pgdata: {}
+  
