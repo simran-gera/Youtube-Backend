@@ -36,7 +36,6 @@ q = queue.Queue()
 def myqueue():
     def worker():
         while True:
-            print(f"Working on")
             fetch_data()
             sleep(CHECK_INTERVAL)
 
@@ -156,10 +155,10 @@ async def get_video():
 
 
 # Renders Error Handling Page
-# @app.errorhandler(Exception)
-# def handle_error(e):
-#     code = 404
-#     if isinstance(e, HTTPException):
-#         code = e.code
-#     return render_template("/error404.html")
+@app.errorhandler(Exception)
+def handle_error(e):
+    code = 404
+    if isinstance(e, HTTPException):
+        code = e.code
+    return render_template("/error404.html")
 
